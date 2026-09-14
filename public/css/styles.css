@@ -595,6 +595,13 @@ section { padding-block: var(--space-6); }
 .info-block h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
 .info-block p { color: var(--ink-soft); margin: 0; }
 
+.map-embed {
+  margin-bottom: var(--space-3);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+.map-embed iframe { display: block; }
+
 .form-field { margin-bottom: var(--space-2); }
 .form-field label {
   display: block;
