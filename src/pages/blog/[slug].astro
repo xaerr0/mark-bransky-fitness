@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft && !data.externalUrl);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+---
+<BaseLayout
+  title={`${post.data.title} | Bransky Fitness Blog`}
+  description={post.data.excerpt}
+  path={`/blog/${post.slug}/`}
+  activeNav="blog"
+>
+
+  <section class="page-intro facets">
+    <div class="wrap" style="max-width: 42rem;">
+      <p style="color:var(--ink-soft); font-size:0.9rem;">{dateFormatter.format(post.data.date)}</p>
+      <h1>{post.data.title}</h1>
+    </div>
+  </section>
+
+  <section aria-label="Post content">
+    <div class="wrap post-body">
+      <Content />
+      <p><a href="/blog/">&larr; Back to all posts</a></p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .post-body { max-width: 42rem; margin-inline: auto; }
+  .post-body :global(p) { color: var(--ink); font-size: 1.05rem; }
+</style>

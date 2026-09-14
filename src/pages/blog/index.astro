@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+---
+<BaseLayout
+  title="Blog | Bransky Fitness, Pleasanton"
+  description="Thoughts, musings, and ruminations on coaching, movement assessments, program design, and the fitness industry from Mark Bransky."
+  path="/blog/"
+  activeNav="blog"
+>
+
+  <section class="page-intro facets">
+    <div class="wrap">
+      <h1>Blog</h1>
+      <p>Thoughts, musings, and ruminations on coaching, assessments, and building a career that lasts.</p>
+    </div>
+  </section>
+
+  <section aria-label="Blog posts">
+    <div class="wrap">
+      <div class="post-list">
+        {posts.map((post) => {
+          const href = post.data.externalUrl ?? `/blog/${post.slug}/`;
+          return (
+            <article class="post-card">
+              <p class="post-date">{dateFormatter.format(post.data.date)}</p>
+              <h2><a href={href}>{post.data.title}</a></h2>
+              <p>{post.data.excerpt}</p>
+              <a class="read-more" href={href}>Read more &rarr;</a>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" aria-labelledby="cta-heading">
+    <div class="wrap">
+      <h2 id="cta-heading">Ready to put it into practice?</h2>
+      <a class="btn btn-primary" href="/contact/">Let's Go!</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .post-list { display: grid; gap: var(--space-4); max-width: 48rem; margin-inline: auto; }
+  .post-card { padding-bottom: var(--space-4); border-bottom: 1px solid var(--rule); }
+  .post-card:last-child { border-bottom: none; }
+  .post-date { color: var(--ink-soft); font-size: 0.88rem; margin-bottom: 0.35rem; }
+  .post-card h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .post-card h2 a { color: var(--ink); text-decoration: none; }
+  .post-card h2 a:hover { color: var(--coral-text); }
+  .post-card p { color: var(--ink-soft); margin-bottom: 0.5rem; }
+  .post-card .read-more { font-size: 0.92rem; font-weight: 600; }
+</style>

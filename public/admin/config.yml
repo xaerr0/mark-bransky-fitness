@@ -1,0 +1,31 @@
+# Local concept build. `local_backend: true` makes Decap talk to the
+# `decap-server` proxy running on localhost (via `npm run cms`) instead of a
+# real git host, so this works fully offline with no login and no OAuth setup.
+#
+# To actually deploy this for Mark to use in production, swap the placeholder
+# repo below for the real one and set up a GitHub OAuth proxy (a small
+# Cloudflare Worker will do) so `backend` can authenticate for real. See the
+# Decap CMS docs: https://decapcms.org/docs/github-backend/
+backend:
+  name: github
+  repo: your-org/bransky-fitness
+  branch: main
+
+local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "External URL (leave blank for a normal post)", name: "externalUrl", widget: "string", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }

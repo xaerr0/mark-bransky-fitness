@@ -1,0 +1,118 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogType?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  activeNav: "home" | "training" | "about" | "testimonials" | "blog" | "trainer-development" | "contact";
+  structuredData?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  path,
+  ogType = "website",
+  ogTitle = title,
+  ogDescription = description,
+  ogImage,
+  activeNav,
+  structuredData,
+} = Astro.props;
+
+const canonical = new URL(path, Astro.site).toString();
+
+const navItems = [
+  { key: "home", href: "/", label: "Home" },
+  { key: "training", href: "/training/", label: "Training" },
+  { key: "about", href: "/about/", label: "About Me" },
+  { key: "testimonials", href: "/testimonials/", label: "Testimonials" },
+  { key: "blog", href: "/blog/", label: "Blog" },
+  { key: "trainer-development", href: "/trainer-development/", label: "Trainer Development" },
+  { key: "contact", href: "/contact/", label: "Contact" },
+] as const;
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content={ogType}>
+<meta property="og:title" content={ogTitle}>
+<meta property="og:description" content={ogDescription}>
+<meta property="og:url" content={canonical}>
+{ogImage && <meta property="og:image" content={ogImage}>}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css">
+{structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="/images/logo-mark.png" alt="Bransky Fitness logo" width="34" height="34">
+      <span>Bransky Fitness</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" id="navToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links" id="primary-nav">
+        {navItems.map((item) => (
+          <li><a href={item.href} aria-current={activeNav === item.key ? "page" : undefined}>{item.label}</a></li>
+        ))}
+        <li><a class="btn btn-primary" href="/contact/">Let's Go!</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <slot />
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Bransky Fitness</h4>
+        <p style="max-width:32ch;">Private personal training studio in Pleasanton, CA. By appointment, Monday through Saturday.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/training/">Training</a></li>
+          <li><a href="/about/">About Me</a></li>
+          <li><a href="/testimonials/">Testimonials</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/trainer-development/">Trainer Development</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:Mark@branskyfitness.com">Mark@branskyfitness.com</a></li>
+          <li><a href="https://www.linkedin.com/in/mark-bransky-19b2754/">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/trainertrainerguy">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">1040 Serpentine Lane, Suites 203/204, Pleasanton, CA 94566 &middot; &copy; <span id="year"></span> Bransky Fitness</div>
+  </div>
+</footer>
+
+<script src="/js/main.js" is:inline></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Contact | Bransky Fitness, Pleasanton"
+  description="Get in touch with Mark Bransky in Pleasanton, CA. Private studio at 1040 Serpentine Lane, appointments Monday through Saturday."
+  path="/contact/"
+  activeNav="contact"
+>
+
+  <section class="page-intro facets">
+    <div class="wrap">
+      <h1>Let's go.</h1>
+      <p>Send a few details about what you're dealing with or working toward, and Mark will follow up to schedule your first session.</p>
+    </div>
+  </section>
+
+  <section aria-label="Contact details and form">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <div class="info-block">
+            <h3>Studio</h3>
+            <p>1040 Serpentine Lane, Suites 203/204<br>Pleasanton, CA 94566</p>
+          </div>
+          <div class="info-block">
+            <h3>Hours</h3>
+            <p>Monday&ndash;Saturday, by appointment</p>
+          </div>
+          <div class="info-block">
+            <h3>Email</h3>
+            <p><a href="mailto:Mark@branskyfitness.com">Mark@branskyfitness.com</a></p>
+          </div>
+          <div class="info-block">
+            <h3>Payment</h3>
+            <p>HSA and FSA funds accepted</p>
+          </div>
+          <div class="info-block">
+            <h3>Elsewhere</h3>
+            <p><a href="https://www.linkedin.com/in/mark-bransky-19b2754/">LinkedIn</a> &middot; <a href="https://www.instagram.com/trainertrainerguy">Instagram</a></p>
+          </div>
+        </div>
+
+        <div>
+          <!-- Wire this form to your preferred backend (e.g. Formspree, Netlify Forms) before launch. -->
+          <form action="#" method="post">
+            <div class="form-field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-field">
+              <label for="goal">What are you dealing with or training toward?</label>
+              <textarea id="goal" name="goal" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-coral">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
