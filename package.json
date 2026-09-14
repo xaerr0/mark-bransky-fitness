@@ -6,13 +6,17 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "cms": "decap-server"
+    "preview": "npm run build && wrangler dev",
+    "cms": "decap-server",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "11",
     "astro": "^4.16.0"
   },
   "devDependencies": {
-    "decap-server": "^3.2.0"
+    "decap-server": "^3.2.0",
+    "wrangler": "^4.131.2"
   }
 }

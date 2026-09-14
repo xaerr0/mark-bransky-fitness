@@ -1,5 +1,12 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "legacy-static"]
+	"extends": "astro/tsconfigs/base",
+	"include": [
+		".astro/types.d.ts",
+		"**/*",
+		"./worker-configuration.d.ts"
+	],
+	"exclude": [
+		"dist",
+		"legacy-static"
+	]
 }
