@@ -29,10 +29,17 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month:
           const href = post.data.externalUrl ?? `/blog/${post.slug}/`;
           return (
             <article class="post-card">
-              <p class="post-date">{dateFormatter.format(post.data.date)}</p>
-              <h2><a href={href}>{post.data.title}</a></h2>
-              <p>{post.data.excerpt}</p>
-              <a class="read-more" href={href}>Read more &rarr;</a>
+              {post.data.image && (
+                <a class="post-thumb" href={href} tabindex="-1" aria-hidden="true">
+                  <img src={post.data.image} alt="" width="160" height="120" loading="lazy" />
+                </a>
+              )}
+              <div class="post-body">
+                <p class="post-date">{dateFormatter.format(post.data.date)}</p>
+                <h2><a href={href}>{post.data.title}</a></h2>
+                <p>{post.data.excerpt}</p>
+                <a class="read-more" href={href}>Read more &rarr;</a>
+              </div>
             </article>
           );
         })}
@@ -51,12 +58,20 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month:
 
 <style>
   .post-list { display: grid; gap: var(--space-4); max-width: 48rem; margin-inline: auto; }
-  .post-card { padding-bottom: var(--space-4); border-bottom: 1px solid var(--rule); }
+  .post-card { display: flex; gap: var(--space-3); padding-bottom: var(--space-4); border-bottom: 1px solid var(--rule); }
   .post-card:last-child { border-bottom: none; }
+  .post-thumb { flex: none; display: block; width: 160px; height: 120px; overflow: hidden; }
+  .post-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .post-body { min-width: 0; }
   .post-date { color: var(--ink-soft); font-size: 0.88rem; margin-bottom: 0.35rem; }
   .post-card h2 { font-size: 1.4rem; margin-bottom: 0.5rem; }
   .post-card h2 a { color: var(--ink); text-decoration: none; }
   .post-card h2 a:hover { color: var(--coral-text); }
   .post-card p { color: var(--ink-soft); margin-bottom: 0.5rem; }
   .post-card .read-more { font-size: 0.92rem; font-weight: 600; }
+
+  @media (max-width: 560px) {
+    .post-card { flex-direction: column; }
+    .post-thumb { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  }
 </style>

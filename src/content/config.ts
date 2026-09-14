@@ -6,6 +6,8 @@ const blog = defineCollection({
     title: z.string(),
     date: z.date(),
     excerpt: z.string(),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
     // Forgiving on purpose: a strict z.string().url() turns one typo (blank
     // field, or a URL typed without "https://", both easy mistakes in the
     // CMS editor) into a build failure for the whole site, not just one post.

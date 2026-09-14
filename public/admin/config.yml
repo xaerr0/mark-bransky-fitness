@@ -26,6 +26,8 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Photo", name: "image", widget: "image", required: false, hint: "Shows on the blog list and at the top of the post." }
+      - { label: "Photo alt text (describe the photo for screen readers)", name: "imageAlt", widget: "string", required: false }
       - { label: "External URL (leave blank for a normal post)", name: "externalUrl", widget: "string", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }

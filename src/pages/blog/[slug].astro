@@ -23,6 +23,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month:
   title={`${post.data.title} | Bransky Fitness Blog`}
   description={post.data.excerpt}
   path={`/blog/${post.slug}/`}
+  ogImage={post.data.image ? new URL(post.data.image, Astro.site).toString() : undefined}
   activeNav="blog"
 >
 
@@ -32,6 +33,12 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month:
       <h1>{post.data.title}</h1>
     </div>
   </section>
+
+  {post.data.image && (
+    <figure class="post-hero">
+      <img src={post.data.image} alt={post.data.imageAlt ?? ""} width="1200" height="800" loading="eager">
+    </figure>
+  )}
 
   <section aria-label="Post content">
     <div class="wrap post-body">
@@ -43,6 +50,8 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", { year: "numeric", month:
 </BaseLayout>
 
 <style>
+  .post-hero { max-width: 48rem; margin: 0 auto var(--space-5); padding-inline: var(--gutter); }
+  .post-hero img { width: 100%; height: auto; }
   .post-body { max-width: 42rem; margin-inline: auto; }
   .post-body :global(p) { color: var(--ink); font-size: 1.05rem; }
 </style>

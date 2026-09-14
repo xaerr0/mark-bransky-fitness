@@ -2,6 +2,8 @@
 title: "Welcome to the New Blog"
 date: 2026-09-14
 excerpt: "This site just moved to a faster setup, and I can now write and publish posts myself, no developer required."
+image: "/images/hero-squat-alt.jpg"
+imageAlt: "Mark Bransky coaching a client through a bodyweight squat in his private Pleasanton training studio"
 ---
 
 I just moved Bransky Fitness onto a new setup, and one of the best parts is this: I can write and publish posts myself now, straight from a simple editor, without needing to touch code or wait on anyone.
