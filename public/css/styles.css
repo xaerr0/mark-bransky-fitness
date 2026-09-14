@@ -480,8 +480,13 @@ section { padding-block: var(--space-6); }
   margin-top: var(--space-5);
 }
 
-.trust-strip img { height: 88px; width: auto; }
-.trust-strip p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; max-width: 22ch; text-align: left; }
+.trust-strip img { height: 170px; width: auto; box-shadow: 0 12px 30px -12px rgba(14,15,16,0.35); }
+.trust-strip p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; max-width: 22ch; text-align: left; }
+
+@media (max-width: 560px) {
+  .trust-strip { flex-direction: column; text-align: center; }
+  .trust-strip p { text-align: center; }
+}
 
 /* ---------- About ---------- */
 
