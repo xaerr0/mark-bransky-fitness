@@ -8,8 +8,8 @@
 # Decap CMS docs: https://decapcms.org/docs/github-backend/
 backend:
   name: github
-  repo: your-org/bransky-fitness
-  branch: main
+  repo: xaerr0/mark-bransky-fitness
+  branch: master
 
 local_backend: true
 
