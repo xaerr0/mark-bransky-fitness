@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bransky-fitness-oauth",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-11",
+  "vars": {
+    "GITHUB_CLIENT_ID": "Ov23liUFCsnaRmQxU3oQ"
+  }
+}

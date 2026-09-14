@@ -1,15 +1,17 @@
-# Local concept build. `local_backend: true` makes Decap talk to the
-# `decap-server` proxy running on localhost (via `npm run cms`) instead of a
-# real git host, so this works fully offline with no login and no OAuth setup.
+# `local_backend: true` still lets Decap talk to a local `decap-server`
+# proxy (via `npm run cms`) when one is running on localhost, so this keeps
+# working for fully offline local testing with no login at all.
 #
-# To actually deploy this for Mark to use in production, swap the placeholder
-# repo below for the real one and set up a GitHub OAuth proxy (a small
-# Cloudflare Worker will do) so `backend` can authenticate for real. See the
-# Decap CMS docs: https://decapcms.org/docs/github-backend/
+# For everyone else (the real, deployed site), `base_url` points at a small
+# dedicated Cloudflare Worker (oauth-worker/) that handles the GitHub OAuth
+# handshake, since that exchange needs a client secret that can't live in
+# the browser. See the Decap CMS docs: https://decapcms.org/docs/github-backend/
 backend:
   name: github
   repo: xaerr0/mark-bransky-fitness
   branch: master
+  base_url: https://bransky-fitness-oauth.xaerr00.workers.dev
+  auth_endpoint: auth
 
 local_backend: true
 
