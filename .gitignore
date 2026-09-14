@@ -3,3 +3,9 @@ dist/
 .astro/
 *.log
 .DS_Store
+
+# Ad hoc verification screenshots taken at the project root during
+# development; real image assets live under public/images/.
+/*.png
+/*.jpg
+/*.jpeg
